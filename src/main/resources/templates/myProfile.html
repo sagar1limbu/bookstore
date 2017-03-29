@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+
+<div th:replace="common/header :: navbar"/>
+<div class="container">
+    <div class="row" style="margin-bottom: -100px;">
+        <div class="col-xs-8">
+            <h2 class="section-headline"></h2>
+            <h2 class="section-headline"><span th:text="${#strings.toUpperCase(user.username)}"></span></h2>
+        </div>
+        <div class="col-xs-4">
+            <img src="/image/logo.png" class="img-responsive" />
+        </div>
+    </div>
+    <hr style="position: absolute; width: 100%; background-color: #333333; z-index: -1; margin-top: -80px; height: 6px;" />
+    <img src="/image/wood.png" class="img-responsive" style="margin-top: -75px;"/>
+
+    <div clas="row" style="margin-top: 60px;">
+        <div class="col-xs-9 col-xs-offset-3">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li th:classappend="${classActiveEdit}? 'active'"><a href="#tab-1" data-toggle="tab"><span
+                        style="color: red;">Edit</span></a></li>
+                <li th:classappend="${classActiveOrder}? 'active'"><a href="#tab-2" data-toggle="tab"><span
+                        style="color: red;">Orders</span></a></li>
+                <li th:classappend="${classActiveBilling} ? 'active'"><a href="#tab-3" data-toggle="tab"><span
+                        style="color: red;">Billings</span></a></li>
+                <li th:classappend="${classActiveShipping} ? 'active'"><a href="#tab-4" data-toggle="tab"><span
+                        style="color: red;">Shipping</span></a></li>
+            </ul>
+
+            <!-- Tab panels -->
+            <div class="tab-content">
+
+                <!-- Edit User Information-->
+                <div class="tab-pane fade" id="tab-1" th:classappend="${classActiveNewAccount}? 'in active'">
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body"
+                                 style="background-color: #ededed; margin-top: 20px;">
+                                <form th:action="@{/updateUserInfo}" method="post">
+                                    <input type="hidden" name="id" th:value="${user.id}"/>
+                                    <div class="bg-info" th:if="updateUserInfo">User Info Updated.</div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label for="firstName" >First Name</label>
+                                                <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}" />
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="lastName" >Last Name</label>
+                                                <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userName" >Username</label>
+                                        <input type="text" class="form-control" id="userName" name="username" th:value="${user.username}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="currentPassword" >Last Name</label>
+                                        <input type="text" class="form-control" id="currentPassword" name="currentPassword" th:value="${currentPassword}" />
+                                    </div>
+                                    <p style="color: #828282;">Enter your current password to change Email or password.</p>
+                                    <div class="form-group">
+                                        <label for="email" >Email</label>
+                                        <input type="text" class="form-control" id="email" name="email" th:value="${user.email}" />
+                                    </div>
+                                    <p style="color: #828282;">A valid email address. All
+                                        emails from the system withll be sent to this address. The
+                                        email address is not made public and will only be used if
+                                        you wish to receive a new password or wish to receive
+                                        certain notification.</p>
+
+                                    <div class="form-group">
+                                        <label for="newPassword" >Password</label>
+                                        <input type="password" class="form-control" id="newPassword" name="newPassword" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirmPassword" >Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" />
+                                    </div>
+                                    <p style="color: #828282;">enter your correct old password to change email and password.</p>
+
+                                    <button type="submit" class="btn btn-primary">Create new Account</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div> <!--container ends here-->
+
+<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>
